@@ -67,8 +67,12 @@
     </ApplicationDefinition>
     <Compile Include="Validations\ValidationForJmbg.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\GuestViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\EmployeeView.xaml.cs">
+      <DependentUpon>EmployeeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GuestView.xaml.cs">
       <DependentUpon>GuestView.xaml</DependentUpon>
     </Compile>
@@ -85,6 +89,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\EmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GuestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

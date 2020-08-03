@@ -68,7 +68,8 @@ namespace Zadatak_1.ViewModels
             Password = (password as PasswordBox).Password;
             if (Username == "Zaposleni" && Password == "Zaposleni")
             {
-
+                EmployeeView employee = new EmployeeView();
+                employee.ShowDialog();
             }
             else if (validation.ValidationForJMBG(Username) == true && Password == "Gost")
             {

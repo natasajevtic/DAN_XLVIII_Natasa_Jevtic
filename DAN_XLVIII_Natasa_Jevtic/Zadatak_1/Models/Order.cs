@@ -163,7 +163,8 @@ namespace Zadatak_1.Models
         /// This method changes order status to approved and saves changes to database.
         /// </summary>
         /// <param name="order">Order to be approved.</param>
-        public void ApproveOrder(vwOrder order)
+        /// <returns>True if order is approved, false if not.</returns>
+        public bool ApproveOrder(vwOrder order)
         {
             try
             {
@@ -172,18 +173,21 @@ namespace Zadatak_1.Models
                     tblOrder orderToApprove = context.tblOrders.Where(x => x.OrderID == order.OrderID).FirstOrDefault();
                     orderToApprove.OrderStatus = "approved";
                     context.SaveChanges();
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
+                return false;
             }
         }
         /// <summary>
         /// This method changes order status to rejected and saves changes to database.
         /// </summary>
         /// <param name="order">Order to be rejected.</param>
-        public void RejectOrder(vwOrder order)
+        /// <returns>True if order is rejected, false if not.</returns>
+        public bool RejectOrder(vwOrder order)
         {
             try
             {
@@ -192,11 +196,13 @@ namespace Zadatak_1.Models
                     tblOrder orderToReject = context.tblOrders.Where(x => x.OrderID == order.OrderID).FirstOrDefault();
                     orderToReject.OrderStatus = "rejected";
                     context.SaveChanges();
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
+                return false;
             }
         }
         /// <summary>

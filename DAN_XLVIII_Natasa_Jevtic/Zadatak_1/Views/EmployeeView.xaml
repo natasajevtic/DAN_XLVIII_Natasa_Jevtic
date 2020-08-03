@@ -1,0 +1,58 @@
+﻿<Window x:Class="Zadatak_1.Views.EmployeeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zadatak_1.Views"
+        mc:Ignorable="d"
+         Title="Employee" MinHeight="400" MinWidth="600" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <DataGrid ItemsSource="{Binding OrderList,UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding Ordered, UpdateSourceTrigger=PropertyChanged}"
+                IsReadOnly="True"
+                HeadersVisibility="Column"
+                AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Order ID" Binding="{Binding OrderID}"/>
+                    <DataGridTextColumn Header="Date and time" Binding="{Binding DateAndTimeOfOrder}"/>
+                    <DataGridTextColumn Header="Total price" Binding="{Binding TotalPrice}"/>
+                    <DataGridTextColumn Header="Customer" Binding="{Binding CustomerJMBG}"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding OrderStatus}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="x" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteOrder}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Approve" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.ApproveOrder}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Reject" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.RejectOrder}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>
