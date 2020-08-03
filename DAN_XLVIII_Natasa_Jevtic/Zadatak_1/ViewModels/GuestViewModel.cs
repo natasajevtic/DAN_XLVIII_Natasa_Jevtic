@@ -339,7 +339,7 @@ namespace Zadatak_1.ViewModels
         {
             try
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure that you want to cancel the order?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to cancel the order?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     bool isCanceled = newOrder.CancelOrder(Ordered.OrderID);
@@ -372,7 +372,7 @@ namespace Zadatak_1.ViewModels
         {
             try
             {
-                MessageBoxResult result = MessageBox.Show("Are you sure that you want to confirm the order?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to confirm the order?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     bool isConfirmed = newOrder.ConfirmOrder(Ordered);
