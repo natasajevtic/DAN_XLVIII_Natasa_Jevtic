@@ -10,7 +10,7 @@ namespace Zadatak_1.Models
         /// <summary>
         /// This method adds new order to DbSet and then saves changes to database.
         /// </summary>
-        /// <param name="username">Username of quest.</param>
+        /// <param name="username">Username of quest.</param>        
         public void CreateOrder(string username)
         {
             try
@@ -25,12 +25,12 @@ namespace Zadatak_1.Models
                         OrderStatus = "on hold"
                     };
                     context.tblOrders.Add(order);
-                    context.SaveChanges();
+                    context.SaveChanges();                    
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Exception" + ex.Message.ToString());
+                Debug.WriteLine("Exception" + ex.Message.ToString());                
             }
         }
         /// <summary>
@@ -89,7 +89,8 @@ namespace Zadatak_1.Models
         /// This method deletes order and every ordered item in that order from database.
         /// </summary>
         /// <param name="orderID">Id of order.</param>
-        public void CancelOrder(int orderID)
+        /// <returns>True if order is deleted, false if not.</returns>
+        public bool CancelOrder(int orderID)
         {
             try
             {
@@ -107,18 +108,21 @@ namespace Zadatak_1.Models
                     }
                     context.tblOrders.Remove(order);
                     context.SaveChanges();
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
+                return false;
             }
         }
         /// <summary>
         ///  This method changes time of order and saves changes to database.
         /// </summary>
         /// <param name="order">Order.</param>
-        public void ConfirmOrder(vwOrder order)
+        /// <returns>True if order is created, false if not.</returns>
+        public bool ConfirmOrder(vwOrder order)
         {
             try
             {
@@ -127,11 +131,13 @@ namespace Zadatak_1.Models
                     tblOrder orderToEdit = context.tblOrders.Where(x => x.OrderID == order.OrderID).FirstOrDefault();
                     orderToEdit.DateAndTimeOfOrder = DateTime.Now;
                     context.SaveChanges();
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception" + ex.Message.ToString());
+                return false;
             }
         }
         /// <summary>
