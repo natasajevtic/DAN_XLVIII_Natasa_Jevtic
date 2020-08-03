@@ -1,21 +1,20 @@
 ﻿using System.Windows;
-
 using Zadatak_1.ViewModels;
 
-namespace Zadatak_1
+namespace Zadatak_1.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for EmployeeView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EmployeeView : Window
     {
         /// <summary>
         /// Parameterless constructor.
         /// </summary>
-        public MainWindow()
+        public EmployeeView()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel(this);
+            this.DataContext = new EmployeeViewModel(this);
         }
     }
 }
