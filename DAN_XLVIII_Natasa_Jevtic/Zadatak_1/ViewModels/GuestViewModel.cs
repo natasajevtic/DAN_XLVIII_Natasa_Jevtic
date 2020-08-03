@@ -262,7 +262,7 @@ namespace Zadatak_1.ViewModels
                 totalPrice = Ordered.TotalPrice;
                 //running background worker
                 backgroundWorker.RunWorkerAsync();
-            }            
+            }
         }
         /// <summary>
         /// This method invokes method for deleting ordered item.
@@ -285,10 +285,20 @@ namespace Zadatak_1.ViewModels
                 MessageBox.Show(ex.ToString());
             }
         }
-
+        /// <summary>
+        /// This method checks if user can remove item or not.
+        /// </summary>
+        /// <returns>True if can, false if cannot.</returns>
         public bool CanRemoveItemExecute()
         {
-            return true;
+            if (IsVisibleMenu == Visibility.Hidden)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }            
         }
         /// <summary>
         /// This method invokes method for adding item to order.
@@ -329,17 +339,21 @@ namespace Zadatak_1.ViewModels
         {
             try
             {
-                bool isCanceled = newOrder.CancelOrder(Ordered.OrderID);
-                if (isCanceled == true)
+                MessageBoxResult result = MessageBox.Show("Are you sure that you want to cancel the order?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Order is canceled.", "Notification", MessageBoxButton.OK);
+                    bool isCanceled = newOrder.CancelOrder(Ordered.OrderID);
+                    if (isCanceled == true)
+                    {
+                        MessageBox.Show("Order is canceled.", "Notification", MessageBoxButton.OK);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Order cannot be canceled.", "Notification", MessageBoxButton.OK);
+                    }
+                    OrderList = orderItems.GetOrderedItems(username);
+                    guestView.Close();
                 }
-                else
-                {
-                    MessageBox.Show("Order cannot be canceled.", "Notification", MessageBoxButton.OK);
-                }
-                OrderList = orderItems.GetOrderedItems(username);
-                guestView.Close();
             }
             catch (Exception ex)
             {
@@ -358,18 +372,22 @@ namespace Zadatak_1.ViewModels
         {
             try
             {
-                bool isConfirmed = newOrder.ConfirmOrder(Ordered);
-                if (isConfirmed == true)
+                MessageBoxResult result = MessageBox.Show("Are you sure that you want to confirm the order?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
                 {
-                    MessageBox.Show("Order is created. Please wait to be approved.", "Notification", MessageBoxButton.OK);
+                    bool isConfirmed = newOrder.ConfirmOrder(Ordered);
+                    if (isConfirmed == true)
+                    {
+                        MessageBox.Show("Order is created. Please wait to be approved.", "Notification", MessageBoxButton.OK);
+                        IsVisibleMenu = Visibility.Hidden;
+                        IsVisibleOrderStatus = Visibility.Visible;
+                        IsConfirmed = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Order cannot be created.", "Notification", MessageBoxButton.OK);
+                    }                    
                 }
-                else
-                {
-                    MessageBox.Show("Order cannot be created.", "Notification", MessageBoxButton.OK);
-                }
-                IsVisibleMenu = Visibility.Hidden;
-                IsVisibleOrderStatus = Visibility.Visible;
-                IsConfirmed = Visibility.Hidden;
             }
             catch (Exception ex)
             {
