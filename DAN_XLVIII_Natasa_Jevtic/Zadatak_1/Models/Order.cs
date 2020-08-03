@@ -130,6 +130,7 @@ namespace Zadatak_1.Models
                 {
                     tblOrder orderToEdit = context.tblOrders.Where(x => x.OrderID == order.OrderID).FirstOrDefault();
                     orderToEdit.DateAndTimeOfOrder = DateTime.Now;
+                    orderToEdit.OrderStatus = "on hold";
                     context.SaveChanges();
                     return true;
                 }
